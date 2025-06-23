@@ -20,9 +20,9 @@ import { Pokemon } from '../../interfaces/pokemon.interface';
   standalone: true,
 })
 export class PokemonListComponent implements OnInit {
-  pokemonList = signal<Result[]>([]);
-  offsetResults = signal<number>(0);
-  limitResults = signal<number>(5);
+  public pokemonList = signal<Result[]>([]);
+  public offsetResults = signal<number>(0);
+  public limitResults = signal<number>(20);
   searchQuery = '';
   favoritePokemons = signal<Pokemon[]>([]);
 
@@ -40,7 +40,7 @@ export class PokemonListComponent implements OnInit {
     return `/pokemon/${name}`;
   }
 
-  loadPokemon(): void {
+  public loadPokemon(): void {
     this.pokeService.getPokemonList(this.offsetResults(), this.limitResults()).subscribe({
       next: (data: PokemonList) => {
         this.pokemonList.set([...this.pokemonList(), ...data.results]);
@@ -49,9 +49,10 @@ export class PokemonListComponent implements OnInit {
     });
   }
 
-  public getMorePokemon(increasPokemon: number): void {
-    this.limitResults.update(currentVlue =>  currentVlue + increasPokemon);
-    this.pokeService.getPokemonList(5, this.limitResults()).subscribe({
+  public getMorePokemon(): void {
+    const offtet = this.pokemonList().length;
+    this.offsetResults.set(offtet);
+    this.pokeService.getPokemonList(this.offsetResults(), this.limitResults()).subscribe({
       next: (data) => {
         this.pokemonList.set([...this.pokemonList(), ...data.results]);
       },
