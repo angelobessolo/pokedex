@@ -36,7 +36,7 @@
               </div>
             }
             
-            <ul style="display: flex; flex-direction: column; gap: 20px; width: 300px">
+            <ul style="display: flex; flex-direction: column; gap: 20px; width: 220px">
               @for (pokemon of favoritePokemons(); track $index) {
                 <li class="d-flex gap-2 justify-content-between">
                   <a [routerLink]="getRouterLink(pokemon.name)">{{pokemon.name | titlecase}}</a> 
