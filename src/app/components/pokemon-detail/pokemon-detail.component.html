@@ -1,8 +1,23 @@
-<div *ngIf="pokemon">
-  <h1>{{ pokemon.name | titlecase }}</h1>
-  <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
-  <p>Height: {{ pokemon.height }}</p>
-  <p>Weight: {{ pokemon.weight }}</p>
-  <app-pokemon-abilities [abilities]="pokemon.stats"></app-pokemon-abilities>
-  <button (click)="addFavorite()">Add to Favorites</button>
-</div>
+@if (pokemon()) {
+  <div class="card" style="width: 400px; padding: 1rem;">
+    <h1 class="text-center" style="color: darkslateblue;">{{ pokemon().name | titlecase }}</h1>
+    <img style="width: 150px; height: 150px; margin: 0 auto;" [src]="pokemon().sprites.front_default" alt="{{ pokemon().name }}" />
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <p class="card-text">Height: {{ pokemon().height }}</p>
+        <p class="card-text">Weight: {{ pokemon().weight }}</p>
+      </div>
+    </div>
+    
+    <div class="d-flex flex-column justify-content-center mb-3 gap-3">
+      <app-pokemon-abilities [abilities]="pokemon().stats"></app-pokemon-abilities>
+
+      <button class="btn btn-info" (click)="addFavorite()">Add to Favorites</button>
+
+      @if (!flgView) {
+        <button class="btn btn-warning" (click)="viewPokemon(pokemon().name)">View</button>
+      }
+    </div>
+  </div>
+}
+

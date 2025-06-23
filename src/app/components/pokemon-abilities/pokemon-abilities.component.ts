@@ -1,5 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { Stat } from '../../interfaces/pokemon.interface';
 
 @Component({
   selector: 'app-pokemon-abilities',
@@ -8,7 +9,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   templateUrl: './pokemon-abilities.component.html',
   styleUrl: './pokemon-abilities.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PokemonAbilitiesComponent {
-  @Input() abilities: { base_stat: number; stat: { name: string } }[] = [];
+  @Input() abilities: Stat[] = [];
 }

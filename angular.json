@@ -15,7 +15,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:applicationN",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/pokedex-app",
             "index": "src/index.html",
@@ -89,5 +89,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c6045572-5026-4ec9-a8e4-9ea590847f3d"
   }
 }

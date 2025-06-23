@@ -1,0 +1,16 @@
+.container-main{
+  min-height: 100vh;
+  background-image: url('https://img.freepik.com/free-vector/gradient-zoom-effect-background_23-2149721222.jpg?ga=GA1.1.1221680309.1750515410&semt=ais_hybrid&w=740');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+ol, ul{
+  list-style-type: none;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}

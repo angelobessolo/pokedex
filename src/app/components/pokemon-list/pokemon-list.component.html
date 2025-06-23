@@ -1,23 +1,58 @@
-<div>
-  <input [(ngModel)]="searchQuery" placeholder="Search Pokémon" />
-  <button (click)="searchPokemon()">Search</button>
-</div>
-<ul>
-  <li *ngFor="let pokemon of pokemonList">
-    <a [routerLink]="getRouterLink(pokemon.name)">{{
-      pokemon.name | titlecase
-    }}</a>
-  </li>
-</ul>
-<!-- TODO implement pagination -->
-<button>Load More</button>
-<div>
-  Favorites:
-  <ul>
-    <li *ngFor="let pokemon of getFavs()">
-      <a [routerLink]="getRouterLink(pokemon.name)">{{
-        pokemon.name | titlecase
-      }}</a>
-    </li>
-  </ul>
+<div class="container-main">
+  <div class="d-flex align-items-center p-3">
+    <img src="https://cdn.pixabay.com/photo/2016/08/15/00/50/pokeball-1594373_1280.png" alt="pokemon image" style="width: 100px; height: 100px;" />
+    <h1 class="text-danger fw-bold">PokedexApp</h1>
+  </div>
+
+  <div class="container p-3">
+    <div class="input-group mb-3">
+      <input class="input" [(ngModel)]="searchQuery" placeholder="Search Pokémon">
+      <button class="btn btn-outline-primary" type="button" id="button-addon2" (click)="searchPokemon()">Search</button>
+    </div>
+
+    <div class="row">
+      <div class="col-lx-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="" style="max-height: 545px; max-width: 500px; overflow-y: auto; overflow-y: auto; scrollbar-color: #7c831c #ffffff; scrollbar-width: thin;">
+          <ul style="list-style: none;">
+            @for (pokemon of pokemonList(); track $index) {
+              <li>
+                <a [routerLink]="getRouterLink(pokemon.name)" class="text-light" style="text-decoration: none;">{{$index+1}}. {{pokemon.name | titlecase}}</a>
+              </li>
+            }
+          </ul>
+
+          <!-- TODO implement pagination -->
+          <button class="btn btn-success" (click)="getMorePokemon(5)">Load More</button>
+
+          <div class="mt-3 p-4">
+            <p style="color: #ffba00; font-weight: 800;">Favorites:</p>
+            @if (favoritePokemons().length === 0) {
+              <div class="alert alert-warning" role="alert">
+                There aren't favorite pokemons yet. Add some by clicking "Add to Favorites" in the Pokémon detail view.
+              </div>
+            } @else {
+              <div class="alert alert-info" role="alert">
+                Here you have {{favoritePokemons().length }} favorite pokemons. You can delete with de trash icon for each pokemon.
+              </div>
+            }
+            
+            <ul style="display: flex; flex-direction: column; gap: 20px; width: 300px">
+              @for (pokemon of favoritePokemons(); track $index) {
+                <li class="d-flex gap-2 justify-content-between">
+                  <a [routerLink]="getRouterLink(pokemon.name)">{{pokemon.name | titlecase}}</a> 
+                  <button class="btn btn-danger btn-sm ml-2" (click)="removeFavorite(pokemon.name)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lx-6 col-lg-6 col-md-6 col-sm-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>

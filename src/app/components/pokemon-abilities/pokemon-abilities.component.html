@@ -1,5 +1,6 @@
-<p>
-  Stats: @for(ability of abilities; track ability.stat) {
-  <div> {{ ability.stat.name }} : {{ ability.base_stat }} </div>
+<div class="row">
+  <p>Stats: </p>
+  @for(ability of abilities; track ability.stat) {
+    <div class="col-lx-6 col-lg-6 col-md-6 col-sm-12"> <strong>{{ ability.stat.name | titlecase }}</strong> : {{ ability.base_stat }} </div>
   }
-</p>
+</div>
